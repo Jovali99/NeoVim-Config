@@ -11,4 +11,6 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-require("lazy").setup("jovali.plugins")
+require("lazy").setup({{import = "jovali.plugins"}, {import = "jovali.plugins.lsp"}})
+--"jovali.plugins"
+

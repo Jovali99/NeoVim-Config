@@ -20,8 +20,15 @@ return {
 				group_empty = true,
 			},
 			filters = {
-				dotfiles = true,
-			},
+                dotfiles = true,
+            },
+            actions = {
+                open_file = {
+                    window_picker = {
+                        enable = false,
+                    },
+                },
+            },
 		})
 end,
 }

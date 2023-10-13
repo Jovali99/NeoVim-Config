@@ -3,17 +3,25 @@ return {
 -- or                              , branch = '0.1.x',
       dependencies = { 
 	  'nvim-lua/plenary.nvim',
-      "BurntSushi/ripgrep"
+      { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
+      "BurntSushi/ripgrep",
 	  },
 	  config = function()
 	  
   -- Telescope keymaps (FuzzyFinder)
-	local builtin = require('telescope.builtin')
-	vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
-	--vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
-	--vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
-	--vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
-	end
-}
+  local builtin = require('telescope.builtin')
+  local telescope = require("telescope")
 
+  telescope.setup({
+      defaults = {
+          path_display = { "truncate " },
+      },
+  })
+ telescope.load_extension('fzf')
+
+  vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
+  vim.keymap.set("n", "<leader>fs", "<cmd>Telescope live_grep<cr>", { desc = "Find string in cwd" })
+  vim.keymap.set("n", "<leader>fc", "<cmd>Telescope grep_string<cr>", { desc = "Find string under cursor in cwd" })
+    end,
+}
 
