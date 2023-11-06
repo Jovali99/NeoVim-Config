@@ -20,7 +20,7 @@ return {
                 "html",
                 "cssls",
                 "lua_ls",
-                "jedi_language_server",
+                "pyright",
                 "gopls",
             },
             -- auto-install configured servers (with lspconfig)

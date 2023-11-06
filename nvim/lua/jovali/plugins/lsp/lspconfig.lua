@@ -50,8 +50,8 @@ return {
         }
         })
 
-        -- configure "jedi_language_server" server with plugin
-        lspconfig["jedi_language_server"].setup({
+        -- configure "pyright-langserver" server with plugin
+        lspconfig["pyright"].setup({
             capabilities = capabilities,
             on_attach = on_attach,
         })
@@ -59,6 +59,12 @@ return {
 
         -- configure "gopls" server with plugin
         lspconfig["gopls"].setup({
+            capabilities = capabilities,
+            on_attach = on_attach,
+        })
+
+        -- configure "angularls" server with plugin
+        lspconfig["angularls"].setup({
             capabilities = capabilities,
             on_attach = on_attach,
         })
