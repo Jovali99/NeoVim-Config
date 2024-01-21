@@ -12,13 +12,6 @@ return {
                     package_uninstalled = "✗"
                 }
             },
-          --languages = {
-          --    angular = {
-          --        cmd = { "ngserver", "--stdio" },
-          --        filetypes = { "typescript", "html" },
-          --        rootPatterns = { "angular.json" },  -- Specify the pattern for your angular.json file
-          --    },
-          --},
         })
 
         require("mason-lspconfig").setup({

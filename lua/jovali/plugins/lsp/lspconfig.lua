@@ -13,6 +13,13 @@ return {
         -- configure html server
         lspconfig["html"].setup({
             capabilities = capabilities,
+            init_options = {
+                configurationSection = { "html", "javascript" },
+                embeddedLanguages = {
+                    javascript = true
+                },
+                provideFormatter = true
+            },
             on_attach = on_attach,
         })
 
@@ -21,34 +28,36 @@ return {
             capabilities = capabilities,
             on_attach = on_attach,
         })
-
-      -- configure typescript server with plugin
-      lspconfig["tsserver"].setup({
-          capabilities = capabilities,
-          on_attach = on_attach,
-      })
+        
+        -- run ":!npm i -g typescript-language-server"
+        -- configure typescript server with plugin
+        lspconfig["tsserver"].setup({
+            capabilities = capabilities,
+            filetypes = { 'html', 'javascript', 'typescript'},
+            on_attach = on_attach,
+        })
 
         -- configure lua_ls with plugin
         lspconfig["lua_ls"].setup({
             capabilities = capabilities,
             on_attach = on_attach,
             settings = { -- custom settings for lua
-            Lua = {
-                -- make the language server recognize "vim" global
-                diagnostics = {
-                    globals = { "vim" },
-                },
-                workspace = {
-                    -- make language server aware of runtime files
-                    library = {
-                        [vim.fn.expand("$VIMRUNTIME/lua")] = true,
-                        [vim.fn.stdpath("config") .. "/lua"] = true,
+                Lua = {
+                    -- make the language server recognize "vim" global
+                    diagnostics = {
+                        globals = { "vim" },
+                    },
+                    workspace = {
+                        -- make language server aware of runtime files
+                        library = {
+                            [vim.fn.expand("$VIMRUNTIME/lua")] = true,
+                            [vim.fn.stdpath("config") .. "/lua"] = true,
+                        },
                     },
                 },
+                
             },
-        }
         })
-
         -- configure "pyright-langserver" server with plugin
         lspconfig["pyright"].setup({
             capabilities = capabilities,
@@ -62,6 +71,7 @@ return {
             on_attach = on_attach,
         })
 
+        -- run ":!npm i -g @angular/language-server"
         -- configure "angularls" server with plugin
         local project_library_path = "/Users/darki/AppData/Roaming/npm/node_modules"
         local cmd = {"node",  "/Users/darki/AppData/Roaming/npm/node_modules/@angular/language-server","--stdio", "--tsProbeLocations", project_library_path , "--ngProbeLocations", project_library_path}
