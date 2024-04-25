@@ -11,7 +11,14 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-require("lazy").setup({{import = "jovali.plugins"}, {import = "jovali.plugins.lsp"}})
---"jovali.plugins"
+require("lazy").setup({{import = "jovali.plugins"}, {import = "jovali.plugins.lsp"},})
+
+-- Autoload java lsp whilst inside a java buffer
+vim.cmd [[
+    augroup jdtls_lsp
+    autocmd!
+    autocmd FileType java lua require'jovali.plugins.lsp.jdtls.jdtls_setup'.setup()
+    augroup end
+]]
 
 

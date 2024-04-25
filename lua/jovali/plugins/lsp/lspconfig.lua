@@ -2,6 +2,14 @@ return {
     'neovim/nvim-lspconfig',
     dependencies = {
         'hrsh7th/cmp-nvim-lsp',
+        'mfussenegger/nvim-jdtls',
+    },
+    opts = {
+        setup = {
+            jdtls = function()
+                return true -- avoid duplicate servers
+            end,
+        },
     },
     config = function()
         local lspconfig = require("lspconfig")
@@ -29,6 +37,16 @@ return {
             on_attach = on_attach,
         })
         
+        -- configure jdtls "java" server
+        --lspconfig["jdtls"].setup({
+        --    capabilities = capabilities,
+        --    cmd = {vim.fn.stdpath("data") .. "/mason/bin/jdtls"},
+        --    --root_dir = vim.fs.dirname(vim.fs.find({'gradlew', '.git', 'mvnw'}, { upward = true })[1]), -- Use vim.fn.getcwd() to get the current working directory
+        --    --root_dir = vim.fs.dirname(vim.fn.getcwd()),
+        --    on_attach = on_attach,
+        --})
+
+
         -- run ":!npm i -g typescript-language-server"
         -- configure typescript server with plugin
         lspconfig["tsserver"].setup({
@@ -58,12 +76,12 @@ return {
                 
             },
         })
+
         -- configure "pyright-langserver" server with plugin
         lspconfig["pyright"].setup({
             capabilities = capabilities,
             on_attach = on_attach,
         })
-
 
         -- configure "gopls" server with plugin
         lspconfig["gopls"].setup({
