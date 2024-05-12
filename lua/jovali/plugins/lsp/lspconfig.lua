@@ -36,16 +36,6 @@ return {
             capabilities = capabilities,
             on_attach = on_attach,
         })
-        
-        -- configure jdtls "java" server
-        --lspconfig["jdtls"].setup({
-        --    capabilities = capabilities,
-        --    cmd = {vim.fn.stdpath("data") .. "/mason/bin/jdtls"},
-        --    --root_dir = vim.fs.dirname(vim.fs.find({'gradlew', '.git', 'mvnw'}, { upward = true })[1]), -- Use vim.fn.getcwd() to get the current working directory
-        --    --root_dir = vim.fs.dirname(vim.fn.getcwd()),
-        --    on_attach = on_attach,
-        --})
-
 
         -- run ":!npm i -g typescript-language-server"
         -- configure typescript server with plugin
