@@ -1,12 +1,14 @@
 local M = {}
 
 function M.setup()
+    --If jdtls stops working try deleting the workspace and reinstalling jdtls. remember to update jar path
     local jdtls = require("jdtls")
     local jdtls_setup = require("jdtls.setup")
     local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
     local home = os.getenv("USERPROFILE")
-    local jdtls_jar_path = home .. "\\AppData\\Local\\nvim-data\\mason\\packages\\jdtls\\plugins\\org.eclipse.equinox.launcher_1.6.800.v20240304-1850.jar"
+    local jdtls_jar_path = home .. "\\AppData\\Local\\nvim-data\\mason\\packages\\jdtls\\plugins\\org.eclipse.equinox.launcher_1.6.800.v20240330-1250.jar"
+    -- THE JAR Path changes when jdtls is updated
     local jdtls_config_path = home .. "\\AppData\\Local\\nvim-data\\mason\\packages\\jdtls\\config_win"
     --local jdtls_workspace_path = home .. "\\AppData\\Local\\nvim-data\\jdtls-workspace"
 
@@ -14,8 +16,8 @@ function M.setup()
     local root_dir = jdtls_setup.find_root(root_markers)
 
     local project_name = vim.fn.fnamemodify(root_dir, ":p:h:t")
-    local jdtls_workspace_path = home .. "/.cache/jdtls/workspace" .. project_name
-
+    local jdtls_workspace_path = home .. "\\.cache\\jdtls\\workspace\\" .. project_name
+    print(jdtls_workspace_path)
     local config = {
         -- The command that starts the language server
         cmd = {
