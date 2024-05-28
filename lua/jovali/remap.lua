@@ -48,3 +48,10 @@ vim.keymap.set("n", "<leader>Y", [["+Y]])
 
 --search and replace in file
 vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
+
+
+--Resize window highlighted lines
+vim.keymap.set('n', '<C-W>l', '20<C-W>>', {noremap = true});
+vim.keymap.set('n', '<C-W>h', '20<C-W><', {noremap = true});
+vim.keymap.set('n', '<C-W>k', '20<C-W>+', {noremap = true});
+vim.keymap.set('n', '<C-W>j', '20<C-W>-', {noremap = true});
