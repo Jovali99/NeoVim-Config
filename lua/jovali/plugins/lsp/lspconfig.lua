@@ -28,7 +28,7 @@ return {
                 },
                 provideFormatter = true
             },
-            on_attach = on_attach,
+            --on_attach = on_attach,        --  ATTACH AGAIN, BROKE ANGULAR HTML
         })
 
         -- configure css server
@@ -91,10 +91,10 @@ return {
 
         -- run ":!npm i -g @angular/language-server"
         -- configure "angularls" server with plugin
-        --local project_library_path = "/Users/darki/Jobb/adapp/frontend/node_modules/"                                                    --Laptop adapp location
-        --local cmd = {"ngserver", "--stdio", "--tsProbeLocations", project_library_path, "--ngProbeLocations", project_library_path}      --Laptop adapp location
-        local project_library_path = "/Users/darki/AppData/Roaming/npm/node_modules"
-        local cmd = {"node",  "/Users/darki/AppData/Roaming/npm/node_modules/@angular/language-server","--stdio", "--tsProbeLocations", project_library_path , "--ngProbeLocations", project_library_path}
+        local project_library_path = "/Users/darki/Jobb/adapp/frontend/node_modules/"                                                    --Laptop adapp location
+        local cmd = {"ngserver", "--stdio", "--tsProbeLocations", project_library_path, "--ngProbeLocations", project_library_path}      --Laptop adapp location
+        --local project_library_path = "/Users/darki/AppData/Roaming/npm/node_modules"
+        --local cmd = {"node",  "/Users/darki/AppData/Roaming/npm/node_modules/@angular/language-server","--stdio", "--tsProbeLocations", project_library_path , "--ngProbeLocations", project_library_path}
         lspconfig["angularls"].setup({
             capabilities = capabilities,
             on_attach = on_attach,
