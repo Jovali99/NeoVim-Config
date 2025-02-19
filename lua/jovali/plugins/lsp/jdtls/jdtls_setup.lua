@@ -7,7 +7,7 @@ function M.setup()
     local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
     local home = os.getenv("USERPROFILE")
-    local jdtls_jar_path = home .. "\\AppData\\Local\\nvim-data\\mason\\packages\\jdtls\\plugins\\org.eclipse.equinox.launcher_1.6.800.v20240330-1250.jar"
+    local jdtls_jar_path = home .. "\\AppData\\Local\\nvim-data\\mason\\packages\\jdtls\\plugins\\org.eclipse.equinox.launcher_1.6.900.v20240613-2009.jar"
     -- THE JAR Path changes when jdtls is updated
     local jdtls_config_path = home .. "\\AppData\\Local\\nvim-data\\mason\\packages\\jdtls\\config_win"
     --local jdtls_workspace_path = home .. "\\AppData\\Local\\nvim-data\\jdtls-workspace"
@@ -48,8 +48,9 @@ function M.setup()
     local lombok_javaagent = get_lombok_javaagent()
 
     local cmd = {
-        'java', -- or '/path/to/java17_or_newer/bin/java'
+        --'java', -- or '/path/to/java21_or_newer/bin/java'   THIS ALWAYS HAS TO BE >= java 21. THEN SET CORRECT VERSION IN RUNTIME CONFIG
         -- depends on if `java` is in your $PATH env variable and if it points to the right version.
+        home .. '\\.sdkman\\candidates\\java\\21.0.3-ms\\bin\\java.exe',
         '-Declipse.application=org.eclipse.jdt.ls.core.id1',
         '-Dosgi.bundles.defaultStartLevel=4',
         '-Declipse.product=org.eclipse.jdt.ls.core.product',
@@ -71,9 +72,18 @@ function M.setup()
 
 
         root_dir = root_dir,
-
+        
+        -- Here the correct runtime can be configured, java 1.8, java 11 etc.
         settings = {
             java = {
+                configuration = {
+                    runtimes = {
+                        {
+                            name = "JavaSE-1.8",
+                            path = home .. "\\.sdkman\\candidates\\java\\8.0.412-amzn",
+                        }
+                    }
+                }
             }
         },
         on_attach = on_attach,
@@ -81,7 +91,13 @@ function M.setup()
         init_options = {
             bundles = {}
         },
+
+        on_init = function(client)
+            client.notify('workspace/didChangeConfiguration', { settings = client.config.settings })
+        end
     }
+
+
     -- This starts a new client & server,
     -- or attaches to an existing client & server depending on the `root_dir`.
     require('jdtls').start_or_attach(config)
