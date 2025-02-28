@@ -21,10 +21,13 @@ vim.opt.updatetime = 50
 vim.opt.colorcolumn = "80"
 
 vim.cmd[[command! School :cd C:\\Users\\darki\\Documents\\Skol dokument]]
-vim.cmd[[command! NvimConfig :cd C:\\Users\\darki\\Appdata\\Local\\nvim]]
 vim.cmd[[command! Projekt :cd C:\\Users\\darki\\Projekt]]
 vim.cmd[[command! LeetCode :cd C:\\Users\\darki\\Projekt\\Coding\\LeetCode]]
-vim.cmd[[command! Jobb :cd C:\\Users\\darki\\Jobb]]
+
+--vim.cmd[[command! NvimConfig :cd C:\\Users\\darki\\Appdata\\Local\\nvim]]
+--vim.cmd[[command! Jobb :cd C:\\Users\\darki\\Jobb]]
+vim.cmd[[command! NvimConfig :cd C:\\Users\\JoakimVadmanLidberg\\Appdata\\Local\\nvim]]
+vim.cmd[[command! Jobb :cd C:\\Users\\JoakimVadmanLidberg\\Projekt]]
 
 -- Define a variable to store the saved working directory
 vim.g.saved_cwd = ""
