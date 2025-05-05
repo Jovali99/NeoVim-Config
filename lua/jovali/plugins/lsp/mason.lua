@@ -16,12 +16,11 @@ return {
 
         require("mason-lspconfig").setup({
             ensure_installed = {
-                "tsserver",
+                "ts_ls",
                 "html",
                 "cssls",
                 "lua_ls",
                 "pyright",
-                "gopls",
             },
             -- auto-install configured servers (with lspconfig)
             automatic_installation = true, -- not the same as ensure_installed

@@ -20,11 +20,22 @@ vim.opt.updatetime = 50
 
 vim.opt.colorcolumn = "80"
 
-vim.cmd[[command! School :cd C:\\Users\\darki\\Documents\\Skol dokument]]
-vim.cmd[[command! NvimConfig :cd C:\\Users\\darki\\Appdata\\Local\\nvim]]
-vim.cmd[[command! Projekt :cd C:\\Users\\darki\\Projekt]]
-vim.cmd[[command! LeetCode :cd C:\\Users\\darki\\Projekt\\Coding\\LeetCode]]
-vim.cmd[[command! Jobb :cd C:\\Users\\darki\\Jobb]]
+local user = os.getenv("USERNAME")
+
+if user == "darki" then
+    vim.cmd[[command! School :cd C:\\Users\\darki\\Documents\\Skol dokument]]
+    vim.cmd[[command! Projekt :cd C:\\Users\\darki\\Projekt]]
+    vim.cmd[[command! LeetCode :cd C:\\Users\\darki\\Projekt\\Coding\\LeetCode]]
+    vim.cmd[[command! NvimConfig :cd C:\\Users\\darki\\Appdata\\Local\\nvim]]
+    vim.cmd[[command! Jobb :cd C:\\Users\\darki\\Jobb]]
+    print("darki")
+else
+    vim.cmd[[command! NvimConfig :cd C:\\Users\\JoakimVadmanLidberg\\Appdata\\Local\\nvim]]
+    vim.cmd[[command! Jobb :cd C:\\Users\\JoakimVadmanLidberg\\Projekt]]
+    print("work")
+end
+
+
 
 -- Define a variable to store the saved working directory
 vim.g.saved_cwd = ""
@@ -47,11 +58,11 @@ function CurrentProject()
     end
     end
 
--- Define commands for the functions
+-- Commands for the functions
 vim.cmd("command! ConfCurrentProject lua ConfCurrentProject()")
 vim.cmd("command! CurrentProject lua CurrentProject()")
 
--- Function to check file type and execute command
+-- Auto build and execute file depending on language
 function CheckAndExecute()
     -- Get the current buffer's file type
     local filetype = vim.bo.filetype
