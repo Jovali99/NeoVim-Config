@@ -39,7 +39,7 @@ return {
 
         -- run ":!npm i -g typescript-language-server"
         -- configure typescript server with plugin
-        lspconfig["tsserver"].setup({
+        lspconfig["ts_ls"].setup({
             capabilities = capabilities,
             filetypes = { 'html', 'javascript', 'typescript'},
             on_attach = on_attach,
