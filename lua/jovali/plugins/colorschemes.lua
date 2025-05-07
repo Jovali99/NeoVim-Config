@@ -95,12 +95,13 @@ return {
             overrides = function(colors)
                 local theme = colors.theme
                 return {
+                    TelescopeTitle = { fg = theme.ui.special, bold = true },
                     TelescopePromptNormal = { bg = 'NONE' },
-                    TelescopePromptBorder = { fg = theme.ui.bg_dim, bg = 'NONE' },
+                    TelescopePromptBorder = { fg = "#8c8c8c", bg = 'NONE' },
                     TelescopeResultsNormal = { fg = 'NONE', bg = 'NONE'},
-                    TelescopeResultsBorder = { fg = theme.ui.bg_dim, bg = 'NONE' },
+                    TelescopeResultsBorder = { fg = "#8c8c8c", bg = 'NONE' },
                     TelescopePreviewNormal = { bg = 'NONE' },
-                    TelescopePreviewBorder = { bg = 'NONE', fg = theme.ui.bg_dim },
+                    TelescopePreviewBorder = { bg = 'NONE', fg = "#8c8c8c" },
 
                 }
             end,

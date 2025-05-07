@@ -41,7 +41,7 @@ return {
         -- configure typescript server with plugin
         lspconfig["ts_ls"].setup({
             capabilities = capabilities,
-            filetypes = { 'html', 'javascript', 'typescript'},
+            filetypes = { 'html', 'javascript', 'javascript.jsx', 'javascriptreact' , 'typescript', 'typescriptreact', 'typescript.tsx'},
             on_attach = on_attach,
         })
 
