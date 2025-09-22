@@ -1,6 +1,6 @@
-vim.softtabstop = 4
-vim.o.tabstop = 4
-vim.o.shiftwidth = 4
+vim.softtabstop = 2
+vim.o.tabstop = 2
+vim.o.shiftwidth = 2
 vim.o.expandtab = true
 
 vim.opt.nu = true
@@ -34,8 +34,6 @@ else
     vim.cmd[[command! Jobb :cd C:\\Users\\JoakimVadmanLidberg\\Projekt]]
     print("work")
 end
-
-
 
 -- Define a variable to store the saved working directory
 vim.g.saved_cwd = ""
@@ -84,6 +82,12 @@ function CheckAndExecute()
         vim.cmd('echo "Lua file detected! Entering Lua specific command."')
         -- Replace the echo command with your desired Lua-specific command
         -- For example: vim.cmd('luacommand')
+    elseif filetype == 'cpp' then
+        local filename = vim.fn.expand('%:t:r')
+        local exe_name = filename .. ".exe"
+        -- Compile and run the cpp file
+        local command = 'g++ "' .. vim.fn.expand('%') .. '" -o "' .. exe_name .. '" && .\\' .. exe_name
+        vim.cmd('terminal ' .. command)
     else
         vim.cmd('echo "Unknown file type! No specific command."')
     end
