@@ -12,7 +12,6 @@ return {
         },
     },
     config = function()
-        local lspconfig = require("lspconfig")
         local cmp_nvim_lsp = require("cmp_nvim_lsp")
 
         -- used to enable autocompletion (assign to every lsp server config)
@@ -35,36 +34,13 @@ return {
         end
 
         -- configure html server
-        lspconfig["html"].setup({
+        vim.lsp.config("*", {
             capabilities = capabilities,
-            init_options = {
-                configurationSection = { "html", "javascript" },
-                embeddedLanguages = {
-                    javascript = true
-                },
-                provideFormatter = true
-            },
-            on_attach = on_attach,
-        })
-
-        -- configure css server
-        lspconfig["cssls"].setup({
-            capabilities = capabilities,
-            on_attach = on_attach,
-        })
-
-        -- run ":!npm i -g typescript-language-server"
-        -- configure typescript server with plugin
-        lspconfig["ts_ls"].setup({
-            capabilities = capabilities,
-            filetypes = { 'html', 'javascript', 'javascript.jsx', 'javascriptreact' , 'typescript', 'typescriptreact', 'typescript.tsx'},
             on_attach = on_attach,
         })
 
         -- configure lua_ls with plugin
-        lspconfig["lua_ls"].setup({
-            capabilities = capabilities,
-            on_attach = on_attach,
+        vim.lsp.config("lua_ls", {
             settings = { -- custom settings for lua
                 Lua = {
                     -- make the language server recognize "vim" global
@@ -82,18 +58,14 @@ return {
                 
             },
         })
-
-        -- configure "pyright-langserver" server with plugin
-        lspconfig["pyright"].setup({
-            capabilities = capabilities,
-            on_attach = on_attach,
-        })
-
-        -- configure "gopls" server with plugin
-        lspconfig["gopls"].setup({
-            capabilities = capabilities,
-            on_attach = on_attach,
-        })
+        -- Enable all the language servers
+        vim.lsp.enable("html")
+        vim.lsp.enable("cssls")
+        vim.lsp.enable("ts_ls")
+        vim.lsp.enable("lua_ls")
+        vim.lsp.enable("pyright")
+        vim.lsp.enable("gopls")
+        vim.lsp.enable("clangd")
 
         -- run ":!npm i -g @angular/language-server"
         -- configure "angularls" server with plugin
@@ -104,23 +76,13 @@ return {
                       "--stdio",
                       "--tsProbeLocations", ts_probe,
                       "--ngProbeLocations", ts_probe}
-        lspconfig["angularls"].setup({
+        vim.lsp.config("angularls", {
             capabilities = capabilities,
             on_attach = on_attach,
             cmd = cmd,
             on_new_config = function(new_config,new_root_dir)
                 new_config.cmd = cmd
             end,
-        })
-        
-        -- configure clangd server
-        lspconfig["clangd"].setup({
-            capabilities = capabilities,
-            on_attach = on_attach,
-          --on_attach = function(client, bufnr)
-          --    client.server_capabilities.signatureHelpProvider = false
-          --    on_attach(client, bufnr)
-          --end,
         })
     end,
 }
